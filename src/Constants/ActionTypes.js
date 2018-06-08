@@ -1,0 +1,2 @@
+export const MAP_COMMAND = "MAP_COMMAND";
+export const BIND_EVT_EXTENT_CHANGE = "BIND_EVT_EXTENT_CHANGE";

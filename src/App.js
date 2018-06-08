@@ -1,54 +1,56 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import logo from "./images/logo.svg";
-import clock from "./images/alarmClock.jpg";
 import "./css/App.css";
-import * as serviceUtils from "./Utilities/ServiceUtils";
+import MapManager from "./Map/MapManager";
+import Footer from "./Containers/Footer";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as MapAction from "./Actions/MapAction";
+import PropTypes from "prop-types";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const config = process.env;
     this.state = {
-      aaa: 123,
-      bbb: 111,
-      service: config.REACT_APP_SERVICE
+      title: "My Title"
     };
   }
 
   componentDidMount() {
-    serviceUtils
-      .fetchGet(
-        "http://gdev.geotalent.co.th/MEAEVWebAPI/api/lookup/charger/list"
-      )
-      .then(result => console.log(result));
+    const { MapAction } = this.props;
+    MapAction.bindEvtExtentChange(this.onExtentChangeFunction);
   }
 
+  onExtentChangeFunction = params => {
+    this.setState(prevState => ({
+      title: `${prevState.title} X : ${params.centerX} Y : ${params.centerY}`
+    }));
+  };
+
   render() {
-    const config = process.env;
-    // console.log({ ...this.state });
-    // console.log(logo);
     return (
       <div className="App">
         <Helmet>
           <meta charSet="utf-8" />
-          <title>My Title</title>
+          <title>{this.state.title}</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{process.env.NODE_ENV}</p>
-        <p>{process.env.REACT_APP_SECRET_CODE}</p>
-        <p>{config.REACT_APP_SERVICE}</p>
-        <img src={clock} className="Clock" alt="clock" />
+        <MapManager />
+        <Footer />
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  MapAction: bindActionCreators(MapAction, dispatch)
+});
+
+App.propTypes = {
+  MapAction: PropTypes.object.isRequired
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

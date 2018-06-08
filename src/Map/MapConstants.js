@@ -1,0 +1,2 @@
+export const CREATE_MAP = "CREATE_MAP";
+export const DRAW_POINT_AND_ZOOM = "DRAW_POINT_AND_ZOOM";
