@@ -27,6 +27,14 @@ class App extends Component {
     }));
   };
 
+  onOutsideFooterClick = () => {
+    console.log("onOutsideFooterClick");
+  };
+
+  onInsideFooterClick = () => {
+    console.log("onInsideFooterClick");
+  };
+
   render() {
     return (
       <div className="App">
@@ -36,7 +44,11 @@ class App extends Component {
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <MapManager />
-        <Footer />
+        <Footer onFooterClick={this.onOutsideFooterClick}>
+          <Footer onFooterClick={this.onInsideFooterClick} />
+          <input type="text" />
+          <input type="text" />
+        </Footer>
       </div>
     );
   }

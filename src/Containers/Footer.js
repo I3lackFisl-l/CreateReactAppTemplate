@@ -25,9 +25,13 @@ class Footer extends Component {
     }
   };
   render() {
+    console.log("props", this.props);
+    console.log("this", this);
     return (
       <div className="button">
         <button onClick={this.getCurrentLoc}>Get Current Location</button>
+        <button onClick={this.props.onFooterClick}>footer</button>
+        {this.props.children}
       </div>
     );
   }
