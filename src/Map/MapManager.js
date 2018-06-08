@@ -40,26 +40,6 @@ class MapManager extends Component {
     });
   };
 
-  createMapModuleAndFunction = mapCommand => {
-    let modules = [];
-    let mapFunction = null;
-    switch (mapCommand) {
-      case MapConstants.CREATE_MAP:
-        modules = ["esri/Map", "esri/views/SceneView"];
-        mapFunction = this.createMap;
-        break;
-      case MapConstants.DRAW_POINT_AND_ZOOM:
-        this.drawAndZoomPoint();
-        break;
-      default:
-        modules = [];
-        mapFunction = "not found";
-        break;
-    }
-
-    return { modules, mapFunction };
-  };
-
   render() {
     const { mapRdc } = this.props;
     if (mapRdc.mapFunction != null) {
