@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import EsriLoaderReact from "esri-loader-react";
-import * as MapConstants from "./MapConstants";
 import "./map.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
