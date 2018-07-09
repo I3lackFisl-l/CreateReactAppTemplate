@@ -29,7 +29,11 @@ class App extends Component {
           <Route path={"/Page2"} component={() => <h1>Page2</h1>} />
           <Route
             path={"/Page3"}
-            component={() => <img src="./images/pin.png" />}
+            component={() => (
+              <div className="App-header">
+                <img src="./images/pin.png" />
+              </div>
+            )}
           />
         </div>
       </Router>
